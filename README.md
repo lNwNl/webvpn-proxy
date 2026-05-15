@@ -52,6 +52,28 @@ uv sync
 }
 ```
 
+## 环境变量配置
+
+支持通过环境变量配置，环境变量优先级高于配置文件：
+
+```bash
+# WebVPN配置
+export WEBVPN_URL="https://v.hbu.cn"
+export WEBVPN_USERNAME="your_username"
+export WEBVPN_PASSWORD="your_password"
+export WEBVPN_COOKIE="wengine_vpn_ticketv_hbu_cn=xxx; show_vpn=1; ..."
+
+# 代理配置
+export WEBVPN_PROXY_PORT=8080
+export WEBVPN_LOG_LEVEL=INFO
+export WEBVPN_SSL_INSECURE=true
+```
+
+然后启动代理：
+```bash
+uv run webvpn-proxy
+```
+
 ## 使用方法
 
 ### 1. 启动代理

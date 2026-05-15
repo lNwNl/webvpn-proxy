@@ -1,3 +1,4 @@
+import os
 import requests
 import urllib.parse
 import logging
@@ -167,12 +168,45 @@ class WebVPNProxy:
 
 
 # 便捷函数
-def create_proxy(config: dict) -> WebVPNProxy:
-    """从配置创建代理实例"""
+def create_proxy(config: dict = None, use_env: bool = True) -> WebVPNProxy:
+    """从配置创建代理实例
+    
+    Args:
+        config: 配置字典，如果为None则从环境变量加载
+        use_env: 是否从环境变量加载配置（环境变量优先级高于config）
+    
+    Returns:
+        WebVPNProxy实例
+    """
+    if config is None:
+        config = {}
+    
+    # 从环境变量加载配置
+    if use_env:
+        env_mapping = {
+            'WEBVPN_URL': 'webvpn_url',
+            'WEBVPN_USERNAME': 'username',
+            'WEBVPN_PASSWORD': 'password',
+            'WEBVPN_COOKIE': 'cookie',
+        }
+        
+        for env_var, config_key in env_mapping.items():
+            value = os.environ.get(env_var)
+            if value is not None:
+                config[config_key] = value
+    
+    # 设置默认值
+    config.setdefault('webvpn_url', 'https://v.hbu.cn')
+    
     proxy = WebVPNProxy(
-        vpn_base_url=config.get('webvpn_url', 'https://v.hbu.cn'),
+        vpn_base_url=config.get('webvpn_url'),
         username=config.get('username'),
         password=config.get('password'),
         cookie_string=config.get('cookie')
     )
     return proxy
+
+
+def create_proxy_from_env() -> WebVPNProxy:
+    """直接从环境变量创建代理实例"""
+    return create_proxy(use_env=True)
