@@ -1,0 +1,9 @@
+{
+  "webvpn_url": "https://v.hbu.cn",
+  "username": null,
+  "password": null,
+  "cookie": null,
+  "proxy_port": 8080,
+  "log_level": "INFO",
+  "ssl_insecure": true
+}
