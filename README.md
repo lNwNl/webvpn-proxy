@@ -1,5 +1,9 @@
 # WebVPN代理服务器
 
+[![GitHub](https://img.shields.io/badge/GitHub-webvpn--proxy-blue)](https://github.com/lNwNl/webvpn-proxy)
+[![Python](https://img.shields.io/badge/Python-3.13+-green)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+
 用于渗透测试的WebVPN代理工具，自动将HTTP/HTTPS请求转换为WebVPN格式。
 
 ## 功能特性

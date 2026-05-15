@@ -3,6 +3,7 @@ name = "webvpn-proxy"
 version = "0.1.0"
 description = "WebVPN代理服务器，用于渗透测试"
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.13"
 dependencies = [
     "cryptography>=48.0.0",
