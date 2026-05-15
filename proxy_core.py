@@ -160,8 +160,14 @@ class WebVPNProxy:
             状态码、响应头、响应体
         """
         try:
-            response = self.send_request(method, url, headers, body)
-            return response.status_code, dict(response.headers), response.content
+            response = self.send_request(method, url, headers, body, allow_redirects=True)
+            resp_headers = dict(response.headers)
+            # requests库已自动解压gzip，移除压缩头避免客户端二次解压
+            resp_headers.pop('Content-Encoding', None)
+            resp_headers.pop('Transfer-Encoding', None)
+            # 更新Content-Length为实际解压后的长度
+            resp_headers['Content-Length'] = str(len(response.content))
+            return response.status_code, resp_headers, response.content
         except Exception as e:
             logger.error(f"请求处理失败: {e}")
             raise
